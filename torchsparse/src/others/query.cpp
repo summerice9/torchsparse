@@ -15,7 +15,7 @@ std::vector<at::Tensor> query_forward(
   //return group_point_forward_gpu(points, indices);
   int n = hash_target.size(0);
   int n1 = hash_query.size(0);
-  int table_size =  2.3 * pow(2,ceil(log2((double)n)));
+  int table_size = 4 * pow(2,ceil(log2((double)n)));
   if(table_size < 512){
       table_size = 512;
   }
