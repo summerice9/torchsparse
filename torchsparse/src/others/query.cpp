@@ -15,12 +15,12 @@ std::vector<at::Tensor> query_forward(
   //return group_point_forward_gpu(points, indices);
   int n = hash_target.size(0);
   int n1 = hash_query.size(0);
-  int table_size =  2 * pow(2,ceil(log2((double)n)));
+  int table_size =  2.3 * pow(2,ceil(log2((double)n)));
   if(table_size < 512){
       table_size = 512;
   }
   int num_funcs = 3;
-  CuckooHashTableCuda_Multi in_hash_table(table_size, 128 * ceil(log2((double)n)),
+  CuckooHashTableCuda_Multi in_hash_table(table_size, 8 * ceil(log2((double)n)),
                                                                    num_funcs); 
   at::Tensor key_buf = torch::zeros({table_size}, at::device(hash_query.device()).dtype(at::ScalarType::Long));
   at::Tensor val_buf = torch::zeros({table_size}, at::device(hash_query.device()).dtype(at::ScalarType::Long));
