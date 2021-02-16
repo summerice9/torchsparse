@@ -20,7 +20,7 @@ std::vector<at::Tensor> query_forward(
       table_size = 512;
   }
   int num_funcs = 3;
-  CuckooHashTableCuda_Multi in_hash_table(table_size, 32 * ceil(log2((double)n)),
+  CuckooHashTableCuda_Multi in_hash_table(table_size, 64 * ceil(log2((double)n)),
                                                                    num_funcs); 
   at::Tensor key_buf = torch::zeros({table_size}, at::device(hash_query.device()).dtype(at::ScalarType::Long));
   at::Tensor val_buf = torch::zeros({table_size}, at::device(hash_query.device()).dtype(at::ScalarType::Long));
